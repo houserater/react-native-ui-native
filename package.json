@@ -1,0 +1,34 @@
+{
+  "name": "react-native-ui-native",
+  "description": "Native iOS UI views with a React Native backend",
+  "main": "index.ios.js",
+  "scripts": {
+    "start": "react-native start"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "babel-jest": "20.0.3",
+    "babel-preset-react-native": "2.1.0",
+    "jest": "20.0.4",
+    "react": "16.0.0-alpha.12",
+    "react-native": "^0.46.2",
+    "react-test-renderer": "16.0.0-alpha.12"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "version": "1.0.0",
+  "keywords": [
+    "react-native",
+    "react-component",
+    "ios",
+    "hybrid"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/houserater/react-native-ui-native.git"
+  },
+  "license": "MIT",
+  "author": "Hank Brekke (https://github.com/hnryjms)"
+}
