@@ -7,14 +7,11 @@
 //
 
 #import <React/RCTEventEmitter.h>
-#import <React/RCTInvalidating.h>
 
-typedef void (^callback)(NSObject *data, NSError *error);
+typedef void (^RNUINativeDataCallback)(id data, NSError *error);
 
 @interface RNUINativeManager : RCTEventEmitter
 
-- (void)loadDataWithHandler:(NSString * _Nonnull)handler completionBlock:(callback)callbackBlock;
-
-+ (instancetype)sharedUIBridge;
++ (void)loadDataWithHandler:(NSString * _Nonnull)handler completionBlock:(RNUINativeDataCallback)callbackBlock;
 
 @end

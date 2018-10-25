@@ -10,9 +10,42 @@
 
 import React from "react";
 import { NativeModules } from "react-native";
+const BatchedBridge = require('BatchedBridge');
 
 const RNUINativeManager = NativeModules.RNUINativeManager;
 
-export default class RNUINative {
+class RNUINativeController {
 
 }
+
+class RNUINative {
+    constructor() {
+        this.Controller = RNUINativeController;
+
+        this._controllers = {};
+    }
+
+    registerController(Controller) {
+        const controller = new Controller();
+        this._controllers[Controller.name] = controller;
+
+        return controller;
+    }
+
+    async loadData(handler) {
+        const [, controllerName, actionName ] = handler.match(/([a-zA-Z0-9]+)\.([a-zA-Z0-9]+)\(\)/);
+
+        const controller = this._controllers[controllerName];
+
+        try {
+            const response = await controller[actionName]();
+            RNUINativeManager.loadDataComplete(JSON.stringify(response), null);
+        } catch (err) {
+            RNUINativeManager.loadDataComplete(null, err.message);
+        }
+    }
+}
+
+const uiNativeInstance = new RNUINative();
+BatchedBridge.registerCallableModule('RNUINative', uiNativeInstance);
+export default uiNativeInstance;
