@@ -15,7 +15,18 @@ const BatchedBridge = require('BatchedBridge');
 const RNUINativeManager = NativeModules.RNUINativeManager;
 
 class RNUINativeController {
+    constructor() {
+        if (this.registerEventListeners) {
+            this.registerEventListeners();
+        }
+    }
 
+    buildEmitter(eventName) {
+        return (data) => {
+            const fullEventName = `${this.constructor.name}.${eventName}`;
+            RNUINativeManager.emitEvent(fullEventName, JSON.stringify(data));
+        };
+    }
 }
 
 class RNUINative {
