@@ -44,11 +44,10 @@ class RNUINative {
     }
 
     async loadData(handler) {
-        const [, controllerName, actionName ] = handler.match(/([a-zA-Z0-9]+)\.([a-zA-Z0-9]+)\(\)/);
-
-        const controller = this._controllers[controllerName];
-
         try {
+            const [, controllerName, actionName ] = handler.match(/([a-zA-Z0-9]+)\.([a-zA-Z0-9]+)\(\)/);
+            const controller = this._controllers[controllerName];
+
             const response = await controller[actionName]();
             RNUINativeManager.loadDataComplete(JSON.stringify(response), null);
         } catch (err) {
