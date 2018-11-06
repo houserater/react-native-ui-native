@@ -57,12 +57,16 @@ RCT_EXPORT_MODULE()
     }];
 }
 
-+ (void)addEventListener:(NSString *)handler eventBlock:(RNUINativeEventCallback)eventBlock sender:(id)sender {
++ (void)addEventListener:(NSString *)handler eventBlock:(RNUINativeEventCallback)eventBlock withController:(id)sender {
     [self runWhenReady:^(RNUINativeManager *manager) {
-        NSMapTable *listener = [NSMapTable strongToWeakObjectsMapTable];
+        NSMapTable *listener = [NSMapTable strongToStrongObjectsMapTable];
         [listener setObject:eventBlock forKey:@"block"];
-        [listener setObject:sender forKey:@"sender"];
         [listener setObject:handler forKey:@"event"];
+        
+        NSMapTable *controller = [NSMapTable strongToWeakObjectsMapTable];
+        [controller setObject:sender forKey:@"sender"];
+        
+        [listener setObject:controller forKey:@"controller"];
         
         [manager.eventListeners addObject:listener];
     }];
@@ -77,7 +81,7 @@ RCT_EXPORT_METHOD(loadDataComplete:(NSString *)response error:(NSString *)errorS
     }
     id data = nil;
     if (response) {
-        data = [NSJSONSerialization JSONObjectWithData:[response dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&err];
+        data = [NSJSONSerialization JSONObjectWithData:[response dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:&err];
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -89,7 +93,7 @@ RCT_EXPORT_METHOD(loadDataComplete:(NSString *)response error:(NSString *)errorS
 RCT_EXPORT_METHOD(emitEvent:(NSString *)event withEventData:(NSString *)eventData) {
     [self.eventListeners filterUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(NSMapTable *listener, NSDictionary *bindings) {
         // Remove any objects which have been `-[dealloc]`d
-        return ([listener objectForKey:@"sender"] != nil);
+        return ([[listener objectForKey:@"controller"] objectForKey:@"sender"] != nil);
     }]];
     
     NSArray *validEvents = [self.eventListeners filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(NSMapTable *listener, NSDictionary *bindings) {
@@ -103,7 +107,7 @@ RCT_EXPORT_METHOD(emitEvent:(NSString *)event withEventData:(NSString *)eventDat
     NSError *err = nil;
     id data = nil;
     if (eventData) {
-        data = [NSJSONSerialization JSONObjectWithData:[eventData dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&err];
+        data = [NSJSONSerialization JSONObjectWithData:[eventData dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:&err];
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{

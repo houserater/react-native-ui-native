@@ -25,8 +25,11 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		FA27E074218F6C3300C8B9F9 /* libRNUINative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA27E073218F6C2200C8B9F9 /* libRNUINative.a */; };
 		FA4AAD01218F8307008C25E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA4AAD03218F8307008C25E0 /* Main.storyboard */; };
-		FA4AAD07218F8404008C25E0 /* RNUINativeMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4AAD06218F8404008C25E0 /* RNUINativeMainViewController.m */; };
 		FA8DCE1E1F194BA300A97CC9 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA8DCE181F194A5700A97CC9 /* libRCTAnimation.a */; };
+		FA95E3352190BEF100456A32 /* RNUINExamplesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA95E3342190BEF100456A32 /* RNUINExamplesTableViewController.m */; };
+		FA95E3382190BF2F00456A32 /* RNUINExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA95E3372190BF2F00456A32 /* RNUINExampleViewController.m */; };
+		FA95E33C2190C58200456A32 /* RNUINJSEventButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA95E33B2190C58200456A32 /* RNUINJSEventButtonViewController.m */; };
+		FA95E33F2190D9F100456A32 /* RNUINSwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA95E33E2190D9F100456A32 /* RNUINSwiftViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -315,8 +318,14 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		FA27E06E218F6C2200C8B9F9 /* RNUINative.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RNUINative.xcodeproj; sourceTree = "<group>"; };
 		FA4AAD02218F8307008C25E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		FA4AAD05218F8404008C25E0 /* RNUINativeMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNUINativeMainViewController.h; sourceTree = "<group>"; };
-		FA4AAD06218F8404008C25E0 /* RNUINativeMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNUINativeMainViewController.m; sourceTree = "<group>"; };
+		FA95E3332190BEF100456A32 /* RNUINExamplesTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNUINExamplesTableViewController.h; sourceTree = "<group>"; };
+		FA95E3342190BEF100456A32 /* RNUINExamplesTableViewController.m */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = RNUINExamplesTableViewController.m; sourceTree = "<group>"; };
+		FA95E3362190BF2F00456A32 /* RNUINExampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNUINExampleViewController.h; sourceTree = "<group>"; };
+		FA95E3372190BF2F00456A32 /* RNUINExampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNUINExampleViewController.m; sourceTree = "<group>"; };
+		FA95E33A2190C58200456A32 /* RNUINJSEventButtonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNUINJSEventButtonViewController.h; sourceTree = "<group>"; };
+		FA95E33B2190C58200456A32 /* RNUINJSEventButtonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNUINJSEventButtonViewController.m; sourceTree = "<group>"; };
+		FA95E33D2190D9F000456A32 /* RNUINativeExamples-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RNUINativeExamples-Bridging-Header.h"; sourceTree = "<group>"; };
+		FA95E33E2190D9F100456A32 /* RNUINSwiftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNUINSwiftViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -432,6 +441,7 @@
 		13B07FAE1A68108700A75B9A /* RNUINativeExamples */ = {
 			isa = PBXGroup;
 			children = (
+				FA95E33D2190D9F000456A32 /* RNUINativeExamples-Bridging-Header.h */,
 				FA4AAD04218F83BE008C25E0 /* ViewControllers */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -513,7 +523,7 @@
 				00E356EF1AD99517003FC87E /* RNUINativeExamplesTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 			);
-			indentWidth = 2;
+			indentWidth = 4;
 			sourceTree = "<group>";
 			tabWidth = 2;
 		};
@@ -537,8 +547,11 @@
 		FA4AAD04218F83BE008C25E0 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				FA4AAD05218F8404008C25E0 /* RNUINativeMainViewController.h */,
-				FA4AAD06218F8404008C25E0 /* RNUINativeMainViewController.m */,
+				FA95E3392190C55900456A32 /* Examples */,
+				FA95E3332190BEF100456A32 /* RNUINExamplesTableViewController.h */,
+				FA95E3342190BEF100456A32 /* RNUINExamplesTableViewController.m */,
+				FA95E3362190BF2F00456A32 /* RNUINExampleViewController.h */,
+				FA95E3372190BF2F00456A32 /* RNUINExampleViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -550,6 +563,16 @@
 				FA8DCE1A1F194A5700A97CC9 /* libRCTAnimation.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		FA95E3392190C55900456A32 /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				FA95E33A2190C58200456A32 /* RNUINJSEventButtonViewController.h */,
+				FA95E33B2190C58200456A32 /* RNUINJSEventButtonViewController.m */,
+				FA95E33E2190D9F100456A32 /* RNUINSwiftViewController.swift */,
+			);
+			path = Examples;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -597,12 +620,16 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = RNUIN;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = HouseRater;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						LastSwiftMigration = 1010;
 					};
 				};
 			};
@@ -980,8 +1007,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA4AAD07218F8404008C25E0 /* RNUINativeMainViewController.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				FA95E33F2190D9F100456A32 /* RNUINSwiftViewController.swift in Sources */,
+				FA95E3352190BEF100456A32 /* RNUINExamplesTableViewController.m in Sources */,
+				FA95E33C2190C58200456A32 /* RNUINJSEventButtonViewController.m in Sources */,
+				FA95E3382190BF2F00456A32 /* RNUINExampleViewController.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1019,6 +1049,7 @@
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1039,6 +1070,7 @@
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = RNUINativeExamplesTests/Info.plist;
@@ -1057,8 +1089,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/RNUINativeExamples/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1066,6 +1100,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.houserater.RNUINative.examples;
 				PRODUCT_NAME = RNUINativeExamples;
+				SWIFT_OBJC_BRIDGING_HEADER = "RNUINativeExamples/RNUINativeExamples-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1074,8 +1111,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/RNUINativeExamples/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1083,6 +1122,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.houserater.RNUINative.examples;
 				PRODUCT_NAME = RNUINativeExamples;
+				SWIFT_OBJC_BRIDGING_HEADER = "RNUINativeExamples/RNUINativeExamples-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
