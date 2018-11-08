@@ -7,4 +7,7 @@ import React from 'react';
 
 import "./bridge/ExamplesList";
 import "./bridge/SwiftController";
+import "./bridge/NativeArgController";
+import "./bridge/MultiLoadDataController"
+
 import "./js-views/EventButtonView";

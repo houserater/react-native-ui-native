@@ -43,15 +43,19 @@ class RNUINative {
         return controller;
     }
 
-    async loadData(handler) {
+    async loadData(handler, responseId, ...args) {
         try {
+            // We assume native callers will always supply `Controller.functionName()` with the empty parenthesis
+            // (even when arguments are passed in via native code). This is a paradigm that makes it easier to run
+            // Project-Find operations, but is not following any specific programming convention :)
+
             const [, controllerName, actionName ] = handler.match(/([a-zA-Z0-9]+)\.([a-zA-Z0-9]+)\(\)/);
             const controller = this._controllers[controllerName];
 
-            const response = await controller[actionName]();
-            RNUINativeManager.loadDataComplete(JSON.stringify(response), null);
+            const response = await controller[actionName](...args);
+            RNUINativeManager.loadDataComplete(JSON.stringify(response), responseId, null);
         } catch (err) {
-            RNUINativeManager.loadDataComplete(null, err.message);
+            RNUINativeManager.loadDataComplete(null, responseId, err.message);
         }
     }
 }

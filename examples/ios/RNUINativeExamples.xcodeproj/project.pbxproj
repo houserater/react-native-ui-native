@@ -26,6 +26,8 @@
 		FA27E074218F6C3300C8B9F9 /* libRNUINative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA27E073218F6C2200C8B9F9 /* libRNUINative.a */; };
 		FA4AAD01218F8307008C25E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA4AAD03218F8307008C25E0 /* Main.storyboard */; };
 		FA8DCE1E1F194BA300A97CC9 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA8DCE181F194A5700A97CC9 /* libRCTAnimation.a */; };
+		FA938B242194A24F004BF3FE /* RNUINNativeArgsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA938B232194A24F004BF3FE /* RNUINNativeArgsViewController.swift */; };
+		FA938B4A2194A72D004BF3FE /* RNUINLoadMultiDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA938B492194A72D004BF3FE /* RNUINLoadMultiDataViewController.swift */; };
 		FA95E3352190BEF100456A32 /* RNUINExamplesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA95E3342190BEF100456A32 /* RNUINExamplesTableViewController.m */; };
 		FA95E3382190BF2F00456A32 /* RNUINExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA95E3372190BF2F00456A32 /* RNUINExampleViewController.m */; };
 		FA95E33C2190C58200456A32 /* RNUINJSEventButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA95E33B2190C58200456A32 /* RNUINJSEventButtonViewController.m */; };
@@ -318,6 +320,8 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		FA27E06E218F6C2200C8B9F9 /* RNUINative.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RNUINative.xcodeproj; sourceTree = "<group>"; };
 		FA4AAD02218F8307008C25E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FA938B232194A24F004BF3FE /* RNUINNativeArgsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNUINNativeArgsViewController.swift; sourceTree = "<group>"; };
+		FA938B492194A72D004BF3FE /* RNUINLoadMultiDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNUINLoadMultiDataViewController.swift; sourceTree = "<group>"; };
 		FA95E3332190BEF100456A32 /* RNUINExamplesTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNUINExamplesTableViewController.h; sourceTree = "<group>"; };
 		FA95E3342190BEF100456A32 /* RNUINExamplesTableViewController.m */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = RNUINExamplesTableViewController.m; sourceTree = "<group>"; };
 		FA95E3362190BF2F00456A32 /* RNUINExampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNUINExampleViewController.h; sourceTree = "<group>"; };
@@ -571,6 +575,8 @@
 				FA95E33A2190C58200456A32 /* RNUINJSEventButtonViewController.h */,
 				FA95E33B2190C58200456A32 /* RNUINJSEventButtonViewController.m */,
 				FA95E33E2190D9F100456A32 /* RNUINSwiftViewController.swift */,
+				FA938B232194A24F004BF3FE /* RNUINNativeArgsViewController.swift */,
+				FA938B492194A72D004BF3FE /* RNUINLoadMultiDataViewController.swift */,
 			);
 			path = Examples;
 			sourceTree = "<group>";
@@ -1008,11 +1014,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				FA938B242194A24F004BF3FE /* RNUINNativeArgsViewController.swift in Sources */,
 				FA95E33F2190D9F100456A32 /* RNUINSwiftViewController.swift in Sources */,
 				FA95E3352190BEF100456A32 /* RNUINExamplesTableViewController.m in Sources */,
 				FA95E33C2190C58200456A32 /* RNUINJSEventButtonViewController.m in Sources */,
 				FA95E3382190BF2F00456A32 /* RNUINExampleViewController.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				FA938B4A2194A72D004BF3FE /* RNUINLoadMultiDataViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

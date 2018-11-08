@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-    [RNUINativeManager loadDataWithHandler:@"ExamplesList.findExamples()" completionBlock:^(NSArray *examples, NSError *error) {
+  [RNUINativeManager loadDataWithHandler:@"ExamplesList.findExamples()" arguments:nil completionBlock:^(NSArray *examples, NSError *error) {
         if (error) {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Unable to ExamplesList.findExamples()" preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil]];

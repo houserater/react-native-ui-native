@@ -10,7 +10,7 @@
 
 @interface RNUINativeManager ()
 
-@property (nonatomic, copy) RNUINativeDataCallback loadDataCallback;
+@property (nonatomic, strong) NSMutableArray *dataHandlers;
 @property (nonatomic, strong) NSMutableArray *eventListeners;
 
 + (void)runWhenReady:(void(^)(RNUINativeManager *))block;
@@ -28,6 +28,7 @@ RCT_EXPORT_MODULE()
 - (instancetype)init {
     self = [super init];
     if (self) {
+        self.dataHandlers = [NSMutableArray array];
         self.eventListeners = [NSMutableArray array];
     }
     return self;
@@ -50,10 +51,18 @@ RCT_EXPORT_MODULE()
     }
 }
 
-+ (void)loadDataWithHandler:(NSString * _Nonnull)handler completionBlock:(RNUINativeDataCallback)callbackBlock {
++ (void)loadDataWithHandler:(NSString *)handler arguments:(NSArray *)arguments completionBlock:(RNUINativeDataCallback)callbackBlock {
     [self runWhenReady:^(RNUINativeManager *manager) {
-        manager.loadDataCallback = callbackBlock;
-        [manager.bridge enqueueJSCall:@"RNUINative" method:@"loadData" args:@[handler] completion:NULL];
+        NSString *handlerId = [NSUUID UUID].UUIDString;
+        if (callbackBlock) {
+            NSMapTable *handler = [NSMapTable strongToStrongObjectsMapTable];
+            [handler setObject:callbackBlock forKey:@"block"];
+            [handler setObject:handlerId forKey:@"identifier"];
+            
+            [manager.dataHandlers addObject:handler];
+        }
+        NSArray *args = [@[handler, handlerId] arrayByAddingObjectsFromArray:arguments];
+        [manager.bridge enqueueJSCall:@"RNUINative" method:@"loadData" args:args completion:NULL];
     }];
 }
 
@@ -72,7 +81,16 @@ RCT_EXPORT_MODULE()
     }];
 }
 
-RCT_EXPORT_METHOD(loadDataComplete:(NSString *)response error:(NSString *)errorString) {
+RCT_EXPORT_METHOD(loadDataComplete:(NSString *)response responseId:(NSString *)responseId error:(NSString *)errorString) {
+    NSUInteger handlerIdx = [self.dataHandlers indexOfObjectPassingTest:^BOOL(NSMapTable *handler, NSUInteger idx, BOOL *stop) {
+        NSString *handlerId = [handler objectForKey:@"identifier"];
+        return ([handlerId isEqualToString:responseId]);
+    }];
+    
+    if (handlerIdx == NSNotFound) {
+        return;
+    }
+    
     NSError *err = nil;
     if (errorString) {
         err = [NSError errorWithDomain:@"RNUINativeError" code:1 userInfo:@{
@@ -85,8 +103,11 @@ RCT_EXPORT_METHOD(loadDataComplete:(NSString *)response error:(NSString *)errorS
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.loadDataCallback(data, err);
-        self.loadDataCallback = nil;
+        NSMapTable *handler = [self.dataHandlers objectAtIndex:handlerIdx];
+        [self.dataHandlers removeObjectAtIndex:handlerIdx];
+        
+        RNUINativeDataCallback callback = [handler objectForKey:@"block"];
+        callback(data, err);
     });
 }
 
