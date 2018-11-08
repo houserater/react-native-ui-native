@@ -3,5 +3,7 @@
 //
 
 #import <RNUINative/RNUINativeManager.h>
+#import <React/RCTRootView.h>
 
 #import "RNUINExampleViewController.h"
+#import "AppDelegate.h"

@@ -8,14 +8,10 @@
 
 import UIKit
 
-class RNUINNativeArgsViewController: UIViewController, RNUINExampleControllerDelegate {
-    func setExample(_ example: [AnyHashable : Any]) {
-        // Discard example (as input arguments are not needed by this example)
-    }
-    
+class RNUINNativeArgsViewController: UIViewController {
     @IBAction func sendEvent(_ sender: Any) {
         let uuid = UUID().uuidString
-        RNUINativeManager.loadData(withHandler: "NativeArgController.submitUUID()", arguments: [uuid]) { (data, error) in
+        RNUINativeManager.loadData(withHandler: "NativeArgs.submitUUID()", arguments: [uuid]) { (data, error) in
             if let err = error {
                 let message = "JS error: \(err.localizedDescription)"
                 let alert = UIAlertController(title: "JS Error", message: message, preferredStyle: .alert)

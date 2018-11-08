@@ -10,7 +10,7 @@
 
 @interface RNUINExampleViewController ()
 
-@property (nonatomic, strong) UIViewController <RNUINExampleControllerDelegate> *exampleController;
+@property (nonatomic, strong) UIViewController *exampleController;
 @property (nonatomic, strong) UIView *exampleView;
 
 @end
@@ -24,7 +24,6 @@
         self.navigationItem.title = self.example[@"title"];
         
         self.exampleController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:self.example[@"controller"]];
-        [self.exampleController setExample:self.example];
         
         self.exampleView = self.exampleController.view;
         self.exampleView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);

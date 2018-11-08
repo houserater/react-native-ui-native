@@ -12,9 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RNUINJSEventButtonViewController : UIViewController <RNUINExampleControllerDelegate>
-
-@property (nonatomic, strong) NSDictionary *example;
+@interface RNUINObjCEventViewController : UIViewController
 
 @end
 

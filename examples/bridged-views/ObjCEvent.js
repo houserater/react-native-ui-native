@@ -11,15 +11,13 @@ import RNUINative from "../..";
 
 const ForwardingEmitter = new EventEmitter();
 
-class JSEventButtonController extends RNUINative.Controller {
-    static name = "JSEventButtonController";
-
+class ObjCEvent extends RNUINative.Handler {
     registerEventListeners() {
         ForwardingEmitter.addListener('buttonTapped', this.buildEmitter('buttonTapped'));
     }
 }
 
-class JSEventButtonView extends React.Component {
+class ObjCEventView extends React.Component {
     render() {
         return (
             <View style={styles.container}>
@@ -41,5 +39,5 @@ const styles = StyleSheet.create({
     },
 });
 
-RNUINative.registerController(JSEventButtonController);
-AppRegistry.registerComponent('RNUINExample-JSEventButton', () => JSEventButtonView);
+AppRegistry.registerComponent('ObjCEventView', () => ObjCEventView);
+export default RNUINative.registerHandler('ObjCEvent', () => ObjCEvent);

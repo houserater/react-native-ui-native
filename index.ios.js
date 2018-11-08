@@ -14,8 +14,10 @@ const BatchedBridge = require('BatchedBridge');
 
 const RNUINativeManager = NativeModules.RNUINativeManager;
 
-class RNUINativeController {
-    constructor() {
+class RNUINativeHandler {
+    constructor(name) {
+        this._RNUINativeName = name;
+
         if (this.registerEventListeners) {
             this.registerEventListeners();
         }
@@ -23,36 +25,44 @@ class RNUINativeController {
 
     buildEmitter(eventName) {
         return (data) => {
-            const fullEventName = `${this.constructor.name}.${eventName}`;
+            const fullEventName = `${this._RNUINativeName}.${eventName}`;
             RNUINativeManager.emitEvent(fullEventName, JSON.stringify(data));
         };
     }
 }
 
+const _registeredHandlers = {};
+
 class RNUINative {
-    constructor() {
-        this.Controller = RNUINativeController;
+    static Handler = RNUINativeHandler;
 
-        this._controllers = {};
+    static registerHandler(name, registerFn) {
+        const HandlerClass = registerFn();
+        const handler = new HandlerClass(name);
+        _registeredHandlers[name] = handler;
+
+        return { name, handler };
     }
 
-    registerController(Controller) {
-        const controller = new Controller();
-        this._controllers[Controller.name] = controller;
-
-        return controller;
-    }
-
-    async loadData(handler, responseId, ...args) {
+    static async loadData(handleId, responseId, ...args) {
         try {
-            // We assume native callers will always supply `Controller.functionName()` with the empty parenthesis
+            // We assume native callers will always supply `Handler.functionName()` with the empty parenthesis
             // (even when arguments are passed in via native code). This is a paradigm that makes it easier to run
             // Project-Find operations, but is not following any specific programming convention :)
 
-            const [, controllerName, actionName ] = handler.match(/([a-zA-Z0-9]+)\.([a-zA-Z0-9]+)\(\)/);
-            const controller = this._controllers[controllerName];
+            const [, handlerName, actionName ] = handleId.match(/([\w\s-]+)\.([\w\s-]+)\(\)/);
 
-            const response = await controller[actionName](...args);
+            const handler = _registeredHandlers[handlerName];
+            if (!handler) {
+                throw new Error(`Unregistered handler "${handlerName}"`);
+            }
+
+            const actionFn = handler[actionName];
+            if (!actionFn) {
+                throw new Error(`Unregistered action "${handlerName}.${actionFn}()"`);
+            }
+
+            const response = await actionFn(...args);
             RNUINativeManager.loadDataComplete(JSON.stringify(response), responseId, null);
         } catch (err) {
             RNUINativeManager.loadDataComplete(null, responseId, err.message);
@@ -60,6 +70,5 @@ class RNUINative {
     }
 }
 
-const uiNativeInstance = new RNUINative();
-BatchedBridge.registerCallableModule('RNUINative', uiNativeInstance);
-export default uiNativeInstance;
+BatchedBridge.registerCallableModule('RNUINative', RNUINative);
+export default RNUINative;

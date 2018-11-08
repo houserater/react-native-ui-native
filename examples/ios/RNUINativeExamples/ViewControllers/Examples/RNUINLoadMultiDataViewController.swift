@@ -8,20 +8,16 @@
 
 import UIKit
 
-class RNUINLoadMultiDataViewController: UIViewController, RNUINExampleControllerDelegate {
-    func setExample(_ example: [AnyHashable : Any]) {
-        // Discard example (as input arguments are not needed by this example)
-    }
-    
+class RNUINLoadMultiDataViewController: UIViewController {
     @IBOutlet var dataOneLabel: UILabel!
     @IBOutlet var dataTwoLabel: UILabel!
     @IBAction func attemptMultiLoad(_ sender: Any) {
-        RNUINativeManager.loadData(withHandler: "MultiLoadDataController.emitEvent()", arguments: nil, completionBlock: nil)
-        RNUINativeManager.loadData(withHandler: "MultiLoadDataController.loadDataOne()", arguments: nil) { (data, error) in
+        RNUINativeManager.loadData(withHandler: "LoadMultiData.emitEvent()", arguments: nil, completionBlock: nil)
+        RNUINativeManager.loadData(withHandler: "LoadMultiData.loadDataOne()", arguments: nil) { (data, error) in
             self.dataOneLabel.text = "Done"
         }
-        RNUINativeManager.loadData(withHandler: "MultiLoadDataController.emitEvent()", arguments: nil, completionBlock: nil)
-        RNUINativeManager.loadData(withHandler: "MultiLoadDataController.loadDataTwo()", arguments: nil) { (data, error) in
+        RNUINativeManager.loadData(withHandler: "LoadMultiData.emitEvent()", arguments: nil, completionBlock: nil)
+        RNUINativeManager.loadData(withHandler: "LoadMultiData.loadDataTwo()", arguments: nil) { (data, error) in
             self.dataTwoLabel.text = "Done"
         }
     }

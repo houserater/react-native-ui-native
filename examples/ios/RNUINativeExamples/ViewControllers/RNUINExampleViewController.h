@@ -10,12 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol RNUINExampleControllerDelegate <NSObject>
-
-- (void)setExample:(NSDictionary *)example;
-
-@end
-
 @interface RNUINExampleViewController : UIViewController
 
 @property (strong, nonatomic) NSDictionary *example;

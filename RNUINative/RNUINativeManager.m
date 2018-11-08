@@ -6,6 +6,9 @@
 //  Copyright © 2018 HouseRater. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
+#import <React/RCTBridge.h>
+
 #import "RNUINativeManager.h"
 
 @interface RNUINativeManager ()
@@ -18,6 +21,7 @@
 @end
 
 @implementation RNUINativeManager
+@synthesize bridge = _bridge;
 
 RCT_EXPORT_MODULE()
 
@@ -34,11 +38,11 @@ RCT_EXPORT_MODULE()
     return self;
 }
 
-- (NSArray<NSString *> *)supportedEvents {
-    return @[@"RNUINative-UIEvent"];
-}
-
 + (void)runWhenReady:(void (^)(RNUINativeManager *))block {
+    // Note: right now we require `self.bridge` on AppDelegate for finding the bridge to JS
+    // code. Ideally, applications can seed this project with their bridge at launch so we
+    // don't need the assumption below.
+    
     id appDelegate = [UIApplication sharedApplication].delegate;
     RCTBridge *bridge = [appDelegate valueForKey:@"bridge"];
     
