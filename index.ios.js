@@ -59,10 +59,10 @@ class RNUINative {
 
             const actionFn = handler[actionName];
             if (!actionFn) {
-                throw new Error(`Unregistered action "${handlerName}.${actionFn}()"`);
+                throw new Error(`Unregistered action "${handlerName}.${actionName}()"`);
             }
 
-            const response = await actionFn(...args);
+            const response = await actionFn.call(handler, ...args);
             RNUINativeManager.loadDataComplete(JSON.stringify(response), responseId, null);
         } catch (err) {
             RNUINativeManager.loadDataComplete(null, responseId, err.message);
