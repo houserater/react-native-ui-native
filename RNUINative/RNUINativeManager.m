@@ -95,6 +95,9 @@ RCT_EXPORT_METHOD(loadDataComplete:(NSString *)response responseId:(NSString *)r
         return;
     }
     
+    NSMapTable *handler = [self.dataHandlers objectAtIndex:handlerIdx];
+    [self.dataHandlers removeObjectAtIndex:handlerIdx];
+    
     NSError *err = nil;
     if (errorString) {
         err = [NSError errorWithDomain:@"RNUINativeError" code:1 userInfo:@{
@@ -107,9 +110,6 @@ RCT_EXPORT_METHOD(loadDataComplete:(NSString *)response responseId:(NSString *)r
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSMapTable *handler = [self.dataHandlers objectAtIndex:handlerIdx];
-        [self.dataHandlers removeObjectAtIndex:handlerIdx];
-        
         RNUINativeDataCallback callback = [handler objectForKey:@"block"];
         callback(data, err);
     });
