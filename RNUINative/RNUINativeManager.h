@@ -25,19 +25,18 @@ typedef void (^RNUINativeEventCallback)(id data);
  import RNUINative from "react-native-ui-native";
  
  class MyHandler extends RNUINative.Handler {
-     static name = "MyHandler";
      async findDocuments() {
          return [];
      }
  }
  
- RNUINative.registerHandler(MyHandler);
+ RNUINative.registerHandler("HandlerName", () => MyHandler);
  
  // index.ios.js
  import "./bridge/MyHandler.js"@endcode
  
  @param handler Formatted JS handler, as `Handler.function()` with the empty parenthesis.
- @param arguments Optional array of arguments for the JS handler.
+ @param arguments Optional array of arguments for the JS handler (such as `NSString` or `NSDictionary`).
  @param callbackBlock Optional callback for the JS data response. You can send `nil` for event
    emitters.
  */
@@ -49,17 +48,24 @@ typedef void (^RNUINativeEventCallback)(id data);
  transmitted through the bridge.
  
  @code
+ // bridge/MyHandler.js
+ import RNUINative from "react-native-ui-native";
+ 
  class MyHandler extends RNUINative.Handler {
-     static name = "MyHandler";
      registerEventListeners() {
          InnerAppState.addEventListener('js-event-name', this.buildEmitter('jsEventName'));
      }
- }@endcode
+ }
+ 
+ RNUINative.registerHandler("HandlerName", () => MyHandler);
+ 
+ // index.ios.js
+ import "./bridge/MyHandler.js"@endcode
  
  @param handler Formatted JS handler, as `Handler.jsEventName` from the `buildEmitter()` call.
- @param eventBlock Handler for the JS event data (Note: you will want a weak reference to
-   `self` in this block for the listener to be properly removed).
- @param sender Object that will be monitored for deallocation to remove this listener.
+ @param eventBlock Handler for the JS event data (Note: you will want a weak or unowned
+   reference to `self` in this block for the listener to be properly removed).
+ @param sender This object will be monitored for de-allocation to remove this event listener.
  */
 + (void)addEventListener:(NSString * _Nonnull)handler eventBlock:(RNUINativeEventCallback)eventBlock withController:(id)sender;
 
